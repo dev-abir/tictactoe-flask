@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tic Tac Toe</title>
+        <style>
+            body {
+                font-family: sans-serif;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+            table {
+                border-spacing: 10px;
+            }
+            td {
+                border: 2px solid blue;
+                border-radius: 5px;
+                border-spacing: 20px;
+            }
+            button {
+                font-size: large;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding-left: 30px;
+                padding-right: 30px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-color: rgb(0, 200, 0);
+                cursor: pointer;
+                transition: background-color 0.3s;
+                box-shadow: 0 0 5px black;
+            }
+            button:hover {
+                background-color: rgb(0, 150, 0);
+            }
+            .cell {
+                text-align: center;
+                font-size: large;
+                width: 2ch;
+                border: none;
+                outline: none;
+                padding: 30px;
+                background: inherit;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .alert {
+                background-color: burlywood;
+                padding: 10px;
+                box-shadow: 0 0 5px black;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="POST" action="">
+            <table>
+                <tr>
+                    {% if result %}
+                        <div class="alert"> {{ result }}!</div>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["0 0"]}}"{% else %}"-"{% endif %} name="0 0" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["0 1"]}}"{% else %}"-"{% endif %} name="0 1" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["0 2"]}}"{% else %}"-"{% endif %} name="0 2" readonly /></td>
+                </tr>
+                <tr>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["1 0"]}}"{% else %}"-"{% endif %} name="1 0" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["1 1"]}}"{% else %}"-"{% endif %} name="1 1" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["1 2"]}}"{% else %}"-"{% endif %} name="1 2" readonly /></td>
+
+                </tr>
+                <tr>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["2 0"]}}"{% else %}"-"{% endif %} name="2 0" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["2 1"]}}"{% else %}"-"{% endif %} name="2 1" readonly /></td>
+                    <td><input class="cell" type="text" value={% if board %}"{{board["2 2"]}}"{% else %}"-"{% endif %} name="2 2" readonly /></td>
+
+                </tr>
+            </table>
+
+            <button type="submit">Go</button>
+        </form>
+
+        <script>
+            const toggleCell = (event) => {
+                event.target.value =
+                    event.target.value == "O" || event.target.value == "-" ? "X" : "O";
+            };
+
+            window.onload = (event) => {
+                const cellElements = document.getElementsByClassName("cell");
+                for (let i = 0; i < cellElements.length; i++) {
+                    cellElements[i].addEventListener("click", toggleCell);
+                }
+            };
+        </script>
+    </body>
+</html>
